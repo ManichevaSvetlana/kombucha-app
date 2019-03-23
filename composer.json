@@ -1,0 +1,109 @@
+{
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The Laravel Framework.",
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./nova"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/PriceTracker"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/Accounts"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/AccountContacts"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/BelongsToWithType"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/ProductsQuantity"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^7.1.3",
+        "ext-bcmath": "*",
+        "acme/account-contacts": "*",
+        "acme/belongs-to-with-type": "*",
+        "acme/price-tracker": "*",
+        "acme/products-quantity": "*",
+        "devdojo/chatter": "0.2.*",
+        "fideloper/proxy": "^4.0",
+        "firebase/php-jwt": "^5.0",
+        "laravel/framework": "5.7.*",
+        "laravel/nova": "^1.0@dev",
+        "laravel/tinker": "^1.0",
+        "timothyasp/nova-color-field": "^1.0",
+        "twilio/sdk": "^5.28"
+    },
+    "require-dev": {
+        "filp/whoops": "^2.0",
+        "fzaninotto/faker": "^1.4",
+        "mockery/mockery": "^1.0",
+        "nunomaduro/collision": "^2.0",
+        "phpunit/phpunit": "^7.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "classmap": [
+            "database/seeds",
+            "database/factories"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ],
+        "post-update-cmd": [
+            "php artisan cache:clear",
+            "php artisan config:clear",
+            "php artisan view:clear"
+        ],
+        "post-install-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "chmod -R 755 bootstrap/cache",
+            "php artisan cache:clear",
+            "php artisan config:clear",
+            "php artisan view:clear"
+        ]
+    }
+}
